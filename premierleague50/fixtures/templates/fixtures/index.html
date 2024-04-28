@@ -1,9 +1,19 @@
-<!DOCTYPE html>
-<html lang='en'>
-    <head>
-        <title>index</title>
-    </head>
-    <body>
-        hello world
-    </body>
-</html>
+{% extends "fixtures/layout.html" %}
+
+{% block body %}
+
+
+    {% if user.is_authenticated %}
+    {% for pos in data.standings %}
+    {% for team in pos.table %}
+
+        <li>{{ team.team.name }}</li>
+    {% endfor %}
+{% endfor %}
+
+
+
+    {% endif %}
+
+
+{% endblock %}
