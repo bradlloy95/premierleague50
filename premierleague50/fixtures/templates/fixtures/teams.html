@@ -1,0 +1,13 @@
+{% extends "fixtures/layout.html" %}
+
+{% block body %}
+
+    <div>
+        <img src="{{data.crest}}">
+        <h1>{{data.name}}</h1>
+    </div>
+    {% for player in data.squad %}
+        <p>{{ player.name }}</p>
+    {% endfor %}
+{{data}}
+{% endblock %}

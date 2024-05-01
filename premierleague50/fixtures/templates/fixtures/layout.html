@@ -3,34 +3,29 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{% block title %}Fixtures{% endblock %}</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link rel="stylesheet" href="{% static 'fixtures/styles.css' %}">
+        <script src="{% static 'fixtures/script.js' %}" defer></script>
+
         
     </head>
     <body>
 
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-dark bg-dark" style="background-color: blue;">
             <a id="network_btn" class="navbar-brand" href="#">Fixtures</a>
           
-            <div>
+            <div >
               <ul class="navbar-nav mr-auto">
                 {% if user.is_authenticated %}
                     <li class="nav-item">
                         <a id="profile_btn" class="nav-link" href="#""><strong>{{ user.username }}</strong></a>
                     </li>
                 {% endif %}
-                <li class="nav-item">
-                    {% if user.is_authenticated %}
-                        {% comment %} <button id="all_posts_btn" class="nav-link" >All Posts</button>
-                        <button id="all_posts_page_btn" class="nav-link" >All Posts paginate</button> {% endcomment %}
-                        <a href='#' id="all_posts_page_btn" class="nav-link" >All Post</a>
-
-                    {% endif %}
-                </li>
+                   
                 {% if user.is_authenticated %}
-                    <li class="nav-item">
-                        <a id="followig_btn" class="nav-link" href="javascript: load_following_post(1)">Following</a>
-                    </li>
+                    
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
                     </li>

@@ -4,13 +4,62 @@
 
 
     {% if user.is_authenticated %}
-    {% for pos in data.standings %}
-    {% for team in pos.table %}
+<div id="body">
+    <div id="standings_ctr">
+        <div class="standings_header">
+            <div class="standings_team"><p>Team</p></div>
+            <div class="standings_played">Played</div>
+            <div class="standings_GD">GD</div>
+            <div class="standings_points">points</div>
+        </div>
+    
+        {% for pos in data.standings %}
+            {% for team in pos.table %}
+                <div class="standings_content">
+                    <div class="standings_team">
+                        <strong>{{ team.position }}</strong>
+                        <img class="crest_img" src="{{ team.team.crest }}">
+                        <a href="{% url 'teams_view' team.team.id %}">{{ team.team.name }}</a>
+                    </div>
+                    <div class="standings_played">{{ team.playedGames }}</div>
+                    <div class="standings_GD">{{ team.goalDifference }}</div>
+                    <div class="standings_points">{{team.points}}</div>
+                </div>
 
-        <li>{{ team.team.name }}</li>
-    {% endfor %}
-{% endfor %}
+                {% comment %} <li><img class="crest_img" src="{{ team.team.crest }}">{{ team.team.name }}</li> {% endcomment %}
+            {% endfor %}
+        {% endfor %}
+    </div>
+    <div id="fixtures_ctr">
+        <div class="fixtures_ctr_header">
+            <button id="yesterday_btn" class="btn btn-outline-primary">< Yesterday</button>
+            <div id="fixutres_date"style="margin: auto;">{{ date }}</div>
+            <button id="tomorrow_btn" class="btn btn-outline-primary">Tomorrow ></button>
+        </div>
+        <div id="fixtures_content">
+            
+            {% if fixtures.count == 0 %}
+                <div class="fixture">
+                    <h1>No matches today</h1>
+                </div>
+            {% else %}
+                {% for match in fixtures.matches %}
+                    
+                    <h1>Todays fixtures</h1>
 
+                    <div class="fixture">
+                        <div class="fixture_team">{{ match.homeTeam.name }}</div>
+                        <div>VS</div>
+                        <div class="fixture_team">{{ match.awayTeam.name }}</div>
+                    </div>
+                    
+                {% endfor %}
+            {% endif %}
+
+        </div>
+        
+        
+    </div>
 
 
     {% endif %}

@@ -1,0 +1,87 @@
+/* * {
+    border: 1px solid red;
+} */
+#body {
+    display: flex;
+    flex-direction: row;
+    
+}
+
+
+.crest_img {
+    width: 10%;
+    height: auto;
+    margin: 0 5px;
+}
+
+#standings_ctr {
+    background-color: #005593;
+    width: 500px;
+    color: white;
+}
+
+.standings_header, .standings_content {
+    width: auto;
+    height: 50px;
+    display: flex;
+    border-bottom: 1px solid rgb(255, 255, 255);
+
+    .standings_team {
+        margin: 5px auto 5px auto;
+        
+        display: flex;
+        justify-content: center;
+        align-content: center;
+    }
+
+    .standings_played, .standings_points, .standings_GD {
+        margin: 5px;
+        width: 50px;
+        display: flex;
+        justify-content: flex-end;
+    }
+
+}
+.standings_content {
+     
+
+    .standings_team {
+        margin: 5px;
+        margin-right: auto;
+        min-width: 270px;
+        
+        display: flex;
+        justify-content: flex-start;
+        align-content: center;
+    }
+
+}
+
+
+#fixtures_ctr {
+    border: 1px solid red;
+    width: 800px;
+    height: 800px;
+}
+
+.fixtures_ctr_header {
+    
+    display: flex;
+    justify-content: space-around;
+    align-content: center;
+    height: 50px;
+    
+    
+}
+
+.fixture {
+    border: 1px solid blue;
+    display: flex;
+    justify-content: space-between;
+
+    .fixture_team {
+        width: 300px;
+        display: flex;
+        justify-content: center;
+    }
+}
