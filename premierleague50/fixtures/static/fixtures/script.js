@@ -14,7 +14,7 @@ yesterday_btn.addEventListener('click', function() {
     fetch("getFixtures?day=yesterday")
     .then(response => response.json())
     .then(data => {
-        console.log(data)
+        //console.log(data)
         
         //clear div
         fixtures_content.innerHTML = '';
@@ -31,7 +31,7 @@ yesterday_btn.addEventListener('click', function() {
                     fixtures_content.appendChild(fixture)
                 }else {
                     data.serialized.forEach(fixture => {
-                        console.log(fixture)
+                        console.log(fixture.serialized.id)
                         let game = document.createElement('div');
                         game.classList.add('fixture');
                         game.innerHTML = `

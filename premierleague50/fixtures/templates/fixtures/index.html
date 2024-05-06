@@ -4,7 +4,42 @@
 
 
     {% if user.is_authenticated %}
+
+
+    
 <div id="body">
+
+    <div id="fixtures_ctr">
+        <div class="fixtures_ctr_header">
+            <button id="yesterday_btn" class="btn btn-outline-primary">< Yesterday</button>
+            <div id="fixutres_date"style="margin: auto;">{{ date }}</div>
+            <button id="tomorrow_btn" class="btn btn-outline-primary">Tomorrow ></button>
+        </div>
+        <div id="fixtures_content">
+            
+            {% if fixtures.count == 0 %}
+                <div class="fixture">
+                    <h1>No matches today</h1>
+                </div>
+            {% else %}
+                {% for match in fixtures.matches %}
+                    
+                    
+
+                    <div class="fixture">
+                        <div class="fixture_team">{{ match.homeTeam.name }}</div>
+                        <div>  VS  </div>
+                        <div class="fixture_team">{{ match.awayTeam.name }}</div>
+                    </div>
+                    
+                {% endfor %}
+            {% endif %}
+
+        </div>
+        
+        
+    </div>
+
     <div id="standings_ctr">
         <div class="standings_header">
             <div class="standings_team"><p>Team</p></div>
@@ -30,36 +65,25 @@
             {% endfor %}
         {% endfor %}
     </div>
-    <div id="fixtures_ctr">
-        <div class="fixtures_ctr_header">
-            <button id="yesterday_btn" class="btn btn-outline-primary">< Yesterday</button>
-            <div id="fixutres_date"style="margin: auto;">{{ date }}</div>
-            <button id="tomorrow_btn" class="btn btn-outline-primary">Tomorrow ></button>
-        </div>
-        <div id="fixtures_content">
-            
-            {% if fixtures.count == 0 %}
-                <div class="fixture">
-                    <h1>No matches today</h1>
-                </div>
-            {% else %}
-                {% for match in fixtures.matches %}
-                    
-                    <h1>Todays fixtures</h1>
 
-                    <div class="fixture">
-                        <div class="fixture_team">{{ match.homeTeam.name }}</div>
-                        <div>VS</div>
-                        <div class="fixture_team">{{ match.awayTeam.name }}</div>
-                    </div>
-                    
-                {% endfor %}
-            {% endif %}
+    
+</div>
 
+    {% else %}
+    <h2>Login</h2>
+
+    <form action="{% url 'login' %}" method="post" ;">
+        {% csrf_token %}
+        <div class="form-group">
+            <input autofocus class="form-control" type="text" name="username" placeholder="Username">
         </div>
-        
-        
-    </div>
+        <div class="form-group">
+            <input class="form-control" type="password" name="password" placeholder="Password">
+        </div>
+        <input class="btn btn-primary" type="submit" value="Login">
+    </form>
+
+    Don't have an account? <a href="{% url 'register' %}">Register here.</a>
 
 
     {% endif %}

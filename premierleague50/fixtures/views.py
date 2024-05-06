@@ -3,6 +3,7 @@ from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.urls import reverse
 from django.shortcuts import render
+from django.db.models import Q
 import requests                                      #add to requirements
 import json
 from .models import User, Team, Fixture
@@ -93,18 +94,26 @@ def register(request):
         return render(request, "fixtures/register.html")
 
 def teams_view(request, team_id):
-    print(team_id)
+    #print(team_id)
+    data = apiCallTeams(team_id)
+    teamName = Team.objects.filter(name=data['name'])[0].serialize()
+    #print(teamName)
+    fixtures = Fixture.objects.filter(Q(homeTeam=teamName['id']) | Q(awayTeam= teamName['id'])).order_by('date') 
+    serializedFixtures = [{'games':game.serialize()} for game in fixtures]
+    print(serializedFixtures)
     
-    return render(request, "fixtures/teams.html", {'data': apiCallTeams(team_id)})
+    return render(request, "fixtures/teams.html", {'data': data,
+                                                   'serialize': teamName,
+                                                   'fixtures': serializedFixtures})
 
 
 
 import creds
 
+
 #apis
 def apiCallStandings():
-    #API key from football-data.org
-    #token = 'c1536bfd2888413b84d5341baa1dc770'
+   
     #endpoint url for pl standings
     endpoint = 'https://api.football-data.org/v4/competitions/PL/standings'
     headers = {'X-Auth-Token': creds.token}
@@ -124,8 +133,7 @@ def apiCallStandings():
 def apiCallFixtures(date):
      #API key from football-data.org
     
-    #token = 'c1536bfd2888413b84d5341baa1dc770'
-    #endpoint url for pl standings
+  
     dateFrom = '2024-01-01'
     endpoint = f'http://api.football-data.org/v2/competitions/2021/matches?dateFrom={str(date)}&dateTo={str(date)}'
     headers = {'X-Auth-Token': creds.token}
@@ -152,8 +160,8 @@ def apiCallFixtures(date):
     
 def apiCallTeams(id):
     
-    #token = 'c1536bfd2888413b84d5341baa1dc770'
-    #endpoint url for pl standings
+   
+ 
     endpoint = f"https://api.football-data.org/v4/teams/{str(id)}"
 
     headers = {'X-Auth-Token': creds.token}
@@ -163,7 +171,7 @@ def apiCallTeams(id):
     if response.status_code == 200:
         data = response.json()   
         team = Team.objects.get(name=data['name'])      
-        print(team.lastUpdate)   
+        #print(team.lastUpdate)   
         return data
     else:
         return {'error': response.status_code}
@@ -182,7 +190,7 @@ def getFixtures(request):
         current_date_viewed = yesterday
         DBdata = Fixture.objects.filter(date=yesterday)
         count = len(DBdata)
-        print(count)
+        #print(count)
         
         serialized =[{'serialized':match.serialize()} for match in DBdata]
         
@@ -209,7 +217,7 @@ def getFixtures(request):
                          'dateViewed': current_date_viewed,
                          'count':count}
         
-        print(serialized)
+        #print(serialized)
         #data = apiCallFixtures(yesterday)
         #print(data)
         
@@ -274,7 +282,7 @@ def RunUpdates():
         
         data = response.json()
         for match in data['matches']:
-            print(match)
+            #print(match)
             homeTeam = Team.objects.get(name = match['homeTeam']['name'])   
 
             awayTeam = Team.objects.get(name=match['awayTeam']['name'])

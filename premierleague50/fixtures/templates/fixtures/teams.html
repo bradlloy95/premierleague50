@@ -2,12 +2,78 @@
 
 {% block body %}
 
-    <div>
-        <img src="{{data.crest}}">
-        <h1>{{data.name}}</h1>
+    <header class="teams-header-ctr">
+        <img class="crest" src="{{data.crest}}">
+        <a href="{{data.website}}"><h1>{{data.name}}</h1></a>        
+        <h3>{{data.coach.firstName}} {{data.coach.lastName}}</h3>
+        <h5>{{data.venue}}</h5>
+    </header>
+
+    <div id="fixtures_ctr">
+        <div class="fixtures_ctr_header">
+            <div id="fixutres_date"style="margin: auto;">{{ data.name }} Games</div>
+        </div>
+        <div id="fixtures_content">
+                {% for match in fixtures %}
+                    <div class="fixture">
+                        <div class="fixture_date">{{ match.games.date }}</div>
+                        <div class="fixture_team">{{ match.games.hometeam }}</div>
+                        <div class="fixture_score">{{match.games.homeScore}}  </div>
+                        <div>  VS  </div>
+                        <div class="fixture_score">{{match.games.awayScore}}  </div>
+                        <div class="fixture_team">{{ match.games.awayteam }}</div>
+                        {% if match.games.fulltime %}
+                            <div>FT</div>
+                        {% else %}
+                            <div></div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+        </div>
     </div>
-    {% for player in data.squad %}
-        <p>{{ player.name }}</p>
-    {% endfor %}
-{{data}}
+
+    
+    
+    <main class="teams-main-ctr">
+        <div class="GK-ctr">
+            <h4>GoalKeeper</h4>
+            {% for player in data.squad %}
+                {% if player.position == 'Goalkeeper' %}
+                    <h6>{{ player.name }}</h6>
+                {% endif %}
+            {% endfor %}
+        </div>
+        <div class="DF-ctr">
+            <h3>Defence</h3>
+            {% for player in data.squad %}
+                {% if player.position == 'Defence' %}
+                    <h6>{{ player.name }}</h6>
+                {% endif %}
+            {% endfor %}
+        </div>
+        <div class="MD-ctr">
+            <h3>Midfield</h3>
+            {% for player in data.squad %}
+                {% if player.position == 'Midfield' %}
+                    <h6>{{ player.name }}</h6>
+                {% endif %}
+            {% endfor %}
+        </div>
+        <div class="AT-ctr">
+            <h3>Offence</h3>
+            {% for player in data.squad %}
+                {% if player.position == 'Offence' %}
+                    <h6>{{ player.name }}</h6>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </main>
+        
+        
+
+            
+
+        
+        
+
 {% endblock %}

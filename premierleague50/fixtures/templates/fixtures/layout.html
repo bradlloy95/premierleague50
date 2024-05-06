@@ -6,44 +6,62 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{% block title %}Fixtures{% endblock %}</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-        <link rel="stylesheet" href="{% static 'fixtures/styles.css' %}">
-        <script src="{% static 'fixtures/script.js' %}" defer></script>
 
+        {% comment %} <link rel="stylesheet" href="{% static 'fixtures/reset.css' %}"> {% endcomment %}
+        <link rel="stylesheet" href="{% static 'fixtures/layout.css' %}">
+        <link rel="stylesheet" href="{% static 'fixtures/styles.css' %}">
+        <link rel="stylesheet" href="{% static 'fixtures/teams.css' %}">
+
+        
+        <script src="{% static 'fixtures/script.js' %}" defer></script>
         
     </head>
     <body>
 
-        <nav class="navbar navbar-dark bg-dark" style="background-color: blue;">
-            <a id="network_btn" class="navbar-brand" href="#">Fixtures</a>
-          
-            <div >
-              <ul class="navbar-nav mr-auto">
-                {% if user.is_authenticated %}
-                    <li class="nav-item">
-                        <a id="profile_btn" class="nav-link" href="#""><strong>{{ user.username }}</strong></a>
-                    </li>
-                {% endif %}
-                   
-                {% if user.is_authenticated %}
+        <div class="header-ctr">
+            <div class="header-ctr-logo">
+                <img src="https://b.fssta.com/uploads/application/soccer/competition-logos/EnglishPremierLeague.png" alt="logo">
+                <div class="header-ctr-nav">
+                    <ul>
+                        <li><a href="{% url 'index'%}">Home</a></li>
+
+                       
+                         {% if user.is_authenticated %}
                     
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
-                    </li>
-                {% else %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'login' %}">Log In</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'register' %}">Register</a>
-                    </li>
-                {% endif %} 
-              </ul>
+                            <li>
+                                <a  href="{% url 'logout' %}">Log Out</a>
+                            </li>
+                        {% else %}
+                            <li>
+                                <a href="{% url 'login' %}">Log In</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'register' %}">Register</a>
+                            </li>
+                        {% endif %}                     
+
+                    </ul>
+                </div>
+    
             </div>
-          </nav>
-        
+            <div class="header-ctr-social">
+                {% if user.is_authenticated %}
+                    <h5>{{ user.username }}</h5>
+                {% endif %}
+                {% comment %} <a href="https://en-gb.facebook.com/"><img class="header-ctr-social-fb" src="https://static.vecteezy.com/system/resources/previews/018/930/698/original/facebook-logo-facebook-icon-transparent-free-png.png" alt="facebook"></a>
+                <a href="https://www.instagram.com/"><img class="header-ctr-social-ig" src="https://cdn4.iconfinder.com/data/icons/social-media-logos-6/512/62-instagram-512.png" alt="instagram"></a> {% endcomment %}
+            </div>
+        </div>
+
+    
         <div class="body">
             {% block body %}
             {% endblock %}
         </div>
+
+        <footer>
+           <p> made by brad </p>
+           <p> Data by football-data.org </p>
+        </footer>
     </body>
 </html>

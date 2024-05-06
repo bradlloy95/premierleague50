@@ -1,0 +1,116 @@
+
+.body {
+    display: flex;
+    flex-direction: column;    
+    align-items: center;
+    background-color: white;
+}
+
+.header-ctr {
+    max-width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    background-color: #343a40;
+    margin: 0 auto;
+    
+    
+    
+
+}
+
+.header-ctr-logo {
+    padding-left: 20px;
+    width: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header-ctr-logo img {
+    height: 45px;
+}
+
+.header-ctr-nav {
+    height: 100%;
+    width: fit-content;
+    
+
+}
+
+.header-ctr-nav ul {
+    margin-left: 10px;  
+    height: 100%;
+
+    
+}
+
+.header-ctr-nav ul li {
+    display: inline;
+    float: left;
+    height: 100%;
+      
+}
+
+.header-ctr-nav ul li a {
+    padding: 0 5px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    height: 100%;
+    display: flex;
+    align-items: center;  
+    color: white;  
+}
+
+.header-ctr-nav ul li a:hover {
+    color: #3d195b;
+    font-weight: bolder;
+    
+}
+
+.header-ctr-social {
+    height: 100%;
+    width: fit-content;
+    padding-right: 20px; 
+    display: flex;
+    align-items: center;  
+}
+
+.header-ctr-social h5 {   
+    height: fit-content;   
+    color: white; 
+    display: flex; 
+    
+}
+
+.header-ctr-social-fb {
+    height: 25px;
+    padding: 0 10px;
+
+
+}
+.header-ctr-social-ig {
+    height: 25px;
+    padding: 0 10px;
+
+}
+
+footer {
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    p {
+        font-family: sans-serif;
+        font-weight: bold;
+    }
+}
+
+
+@media only screen and (max-width: 600px) {
+    .header-ctr {
+        width: 100%;
+    }
+}

@@ -1,0 +1,71 @@
+.teams-header-ctr {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    h1 {
+        color: #005593;
+    }
+    h3 {
+        color: #316d98;
+    }
+    h5 {
+        color: #567f9c;
+    }
+}
+
+.teams-main-ctr {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+
+.GK-ctr, .DF-ctr, .MD-ctr, .AT-ctr {
+    min-height: 200px;
+    margin: 30px 10px;
+    background-color: #005593;
+    color: white;
+    padding: 20px;
+    border: 2px solid red;
+
+    h3, h4 {
+        border-bottom: 1px solid rgb(255, 255, 255);
+
+    }
+
+}
+
+@media only screen and (max-width: 600px) {
+    .GK-ctr, .DF-ctr, .MD-ctr, .AT-ctr {
+        width: 100%;
+    }
+}
+
+@media only screen and (min-width: 601px) {
+    .GK-ctr, .DF-ctr, .MD-ctr, .AT-ctr {
+        width: 90%;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .GK-ctr, .DF-ctr, .MD-ctr, .AT-ctr {
+        width: 40%;
+    }
+}
+
+@media only screen and (min-width: 992px) {
+    .GK-ctr, .DF-ctr, .MD-ctr, .AT-ctr {
+        width: 30%;
+    }
+}
+
+
+@media only screen and (min-width: 1200px) {
+    .GK-ctr, .DF-ctr, .MD-ctr, .AT-ctr {
+        width: 20%;
+    }
+}
+
+

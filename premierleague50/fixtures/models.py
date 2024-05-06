@@ -52,3 +52,8 @@ class Fixture(models.Model):
                 'awayScore': self.awayTeamScore,
                 'fulltime': self.fulltime,
                 'date': self.date.strftime('%y-%m-%d')}
+        
+        
+# class Player(models.Model):
+#     name = models.CharField(max_length=100)
+    
